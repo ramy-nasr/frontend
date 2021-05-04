@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LabourCostListComponent } from './labour-cost-list.component';
+import { ReposListComponent } from './repos-list.component';
 
 describe('LabourCostListComponent', () => {
-  let component: LabourCostListComponent;
-  let fixture: ComponentFixture<LabourCostListComponent>;
+  let component: ReposListComponent;
+  let fixture: ComponentFixture<ReposListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LabourCostListComponent ]
+      declarations: [ ReposListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LabourCostListComponent);
+    fixture = TestBed.createComponent(ReposListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

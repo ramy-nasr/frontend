@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:6502/application/labourstats'
+  baseUrl: 'https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc'
 };
 
 /*

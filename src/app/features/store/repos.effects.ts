@@ -7,30 +7,25 @@ import { catchError, map, mergeMap} from 'rxjs/operators';
 import {
     GET_LABOUR_COST,
     GET_LABOUR_COST_ERROR,
-    GetLabourCost,
-    GetabourCostSuccess,
-    LabourCostError
-} from './Labour-cost.actions';
+    GetRepos,
+    GetReposSuccess,
+    ReposError
+} from './repos.actions';
 import { environment } from 'src/environments/environment';
-import { LabourCost } from 'src/app/shared/labour-cost';
 
 @Injectable()
-export class LabourCostEffects {
+export class ReposEffects {
     constructor(private http: HttpClient, private action$: Actions) { }
     private ApiURL: string = environment.baseUrl;
 
     @Effect()
-    GetToDos$: Observable<Action> = this.action$.pipe(
-        ofType<GetLabourCost>(GET_LABOUR_COST),
+    GetRepos$: Observable<Action> = this.action$.pipe(
+        ofType<GetRepos>(GET_LABOUR_COST),
         mergeMap(action =>
-            this.http.get(this.ApiURL).pipe(
-                map(data => {
-                    console.log('Effects Http call: ', data);
-                    return new GetabourCostSuccess(data as LabourCost[]);
-                }),
+            this.http.get(`${this.ApiURL}&page=${action.pageNumber}`).pipe(
+                map(data => new GetReposSuccess(data)),
                 catchError(error => {
-                    console.error('Http Call Error: ', error);
-                    return of(new LabourCostError(GET_LABOUR_COST_ERROR, error.message));
+                    return of(new ReposError(GET_LABOUR_COST_ERROR, error.message));
                 })
             )
         )

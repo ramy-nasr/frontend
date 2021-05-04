@@ -1,6 +1,6 @@
 
 import { Action } from "@ngrx/store";
-import { LabourCost } from 'src/app/shared/labour-cost';
+import { Repo } from 'src/app/shared/repos-model';
 
 export const GET_LABOUR_COST = '[LabourCost] GET_ALL';
 export const GET_LABOUR_COST_SUCCESS = '[LabourCost] GET_ALL_SUCCESS';
@@ -10,22 +10,28 @@ export default interface ActionWithPayload<T> extends Action {
     payload: T;
 }
 
-export class GetLabourCost implements Action {
+export class GetRepos implements Action {
     readonly type = GET_LABOUR_COST;
+    readonly pageNumber?: Number;
 
-    constructor() { }
+    constructor(pageNumber?: number) {
+        this.pageNumber = pageNumber;
+     }
 }
 
-export class GetabourCostSuccess implements ActionWithPayload<LabourCost[]> {
+export class GetReposSuccess implements ActionWithPayload<Repo[]> {
     readonly type = GET_LABOUR_COST_SUCCESS;
-    payload: LabourCost[];
+    readonly payload: Repo[];
 
-    constructor(payload: LabourCost[]) {
-        this.payload = payload;
+    constructor(payload) {
+        if(payload){
+            this.payload = payload.items;
+        }
+        
     }
 }
 
-export class LabourCostError implements Action {
+export class ReposError implements Action {
     readonly type: string;
     readonly message: string;
 
@@ -35,6 +41,6 @@ export class LabourCostError implements Action {
     }
 }
 
-export type All = GetLabourCost |
-    GetabourCostSuccess |
-    LabourCostError
+export type All = GetRepos |
+    GetReposSuccess |
+    ReposError

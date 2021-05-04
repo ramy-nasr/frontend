@@ -1,0 +1,12 @@
+<div infiniteScroll (scrolled)="onPaginate()">
+  <app-repo-item  *ngFor="let repo of reposList | async" 
+  [name]="repo.name"
+  [description]="repo.description"
+  [stars]="repo.stargazers_count"
+  [issues]="repo.open_issues_count"
+  [pushedAt]="repo.pushed_at"
+  [submittedBy]="repo.owner.login"
+  [avatar]="repo.owner.avatar_url"
+  >
+  </app-repo-item>
+</div>

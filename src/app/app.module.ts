@@ -2,32 +2,45 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LabourCostListComponent } from './features/labour-cost-list/labour-cost-list.component';
-import { LabourCostComponent } from './features/labour-cost/labour-cost.component';
+import { ReposListComponent } from './features/repos-list/repos-list.component';
+import { RepoItemComponent } from './features/repo-item/repo-item.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { LabourCostEffects } from './features/store/labour-cost.effects';
-import { LabourCostReducer } from './features/store/labour-cost.reducer';
-import { LabourCostService } from './features/labour-cost.service';
+import { ReposEffects } from './features/store/repos.effects';
+import { ReposReducer } from './features/store/repos.reducer';
+import { ReposService } from './features/repos.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
+import { DaysDifferencePipe, NumberSuffixPipe } from './shared/pipes';
+import { MatCardModule } from '@angular/material/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LabourCostComponent,
-    LabourCostListComponent
+    RepoItemComponent,
+    ReposListComponent,
+    DaysDifferencePipe,
+    NumberSuffixPipe
   ],
   imports: [
-    StoreModule.forRoot({ labourCost: LabourCostReducer }),
-    EffectsModule.forRoot([LabourCostEffects]),
+    EffectsModule.forRoot([ReposEffects]),
+    StoreModule.forRoot({ repos: ReposReducer }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule,
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InfiniteScrollModule
   ],
-  providers: [LabourCostService],
-  bootstrap: [AppComponent]
+  providers: [ReposService],
+  bootstrap: [AppComponent],
+  exports:[MatCardModule]
 })
 export class AppModule { }
